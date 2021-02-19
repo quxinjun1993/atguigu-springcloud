@@ -1,0 +1,53 @@
+server:
+  port: 80
+
+
+spring:
+  application:
+    name: cloud-consumer-hystrix-order
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:7003/eureka/
+
+
+#ribbon:
+#  #全局配置
+#  # 请求连接的超时时间 默认的时间为 1 秒
+#  ConnectTimeout: 6000
+#  # 请求处理的超时时间
+#  ReadTimeout: 6000
+
+  #(除了开启功能    后面三个没有看见效果)
+  #    feign.hystrix.enabled=false //Feign是否启用断路器,默认为false
+  #    feign.client.config.default.connectTimeout=10000 //Feign的连接建立超时时间，默认为10秒
+  #    feign.client.config.default.readTimeout=60000 //Feign的请求处理超时时间，默认为60
+  #    feign.client.config.default.retryer=feign.Retryer.Default //Feign使用默认的超时配置，在该类源码中可见，默认单次请求最大时长1秒，重试5次
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 60000
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    enabled: true
+    connection-timeout: 60000
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+
+#开启hystrix请求超时机制   也可以设置成永久不超时
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enable: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
