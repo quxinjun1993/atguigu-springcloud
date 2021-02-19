@@ -8,9 +8,10 @@ spring:
     config:
       server:
         git:
-          uri:
+          uri: https://github.com/quxinjun1993/atguigu-springcloud.git
           #搜索目录
-          search-paths: aaa
+          search-paths:
+            - cloud-config-center-3344
       #读取分支
       label: master
 
