@@ -13,7 +13,7 @@ spring:
           search-paths:
             - cloud-config-center-3344
       #读取分支
-      label: master
+      label: dev
 
 
 
